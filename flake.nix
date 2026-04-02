@@ -12,7 +12,17 @@
     in {
       packages.${system} = {
         neovim = pkgs.neovim;
-        default = pkgs.neovim;
+        nixd = pkgs.nixd;
+        nixfmt = pkgs.nixfmt;
+
+        default = pkgs.buildEnv {
+          name = "pm-gusmano-tools";
+          paths = [
+            pkgs.neovim
+            pkgs.nixd
+            pkgs.nixfmt
+          ];
+        };
       };
     };
 }

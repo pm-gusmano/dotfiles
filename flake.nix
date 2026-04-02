@@ -1,0 +1,18 @@
+{
+  description = "pm-gusmano's user tools";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  };
+
+  outputs = { self, nixpkgs }:
+    let
+      system = "x86_64linux";
+      pkgs = import nixpkgs { inherit system; };
+    in {
+      packages.${system} = {
+        neovim = pkgs.neovim;
+        default = pkgs.neovim;
+      };
+    };
+}

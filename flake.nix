@@ -9,19 +9,19 @@
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
+
+      tools = with pkgs; [
+        neovim
+        nixd
+        nixfmt
+        jujutsu
+        jjui
+      ];
     in {
       packages.${system} = {
-        neovim = pkgs.neovim;
-        nixd = pkgs.nixd;
-        nixfmt = pkgs.nixfmt;
-
         default = pkgs.buildEnv {
           name = "pm-gusmano-tools";
-          paths = [
-            pkgs.neovim
-            pkgs.nixd
-            pkgs.nixfmt
-          ];
+          paths = tools;
         };
       };
     };

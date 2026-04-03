@@ -14,8 +14,24 @@
         neovim
         nixd
         nixfmt
+        eza
+        git
         jujutsu
         jjui
+        just
+        fd
+        fzf
+        ripgrep
+        yazi
+        zellij
+        rustup
+        uv
+        docker
+        apptainer
+        dep-tree
+        difftastic
+        ast-grep
+        tree-sitter
       ];
     in {
       packages.${system} = {

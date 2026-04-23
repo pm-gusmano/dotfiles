@@ -24,5 +24,9 @@
           paths = tools;
         };
       };
+
+      devShells.${system}.default = pkgs.mkShell {
+        packages = tools;
+      };
     };
 }

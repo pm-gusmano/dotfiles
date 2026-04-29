@@ -6,3 +6,15 @@
 --
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+
+-- Configure Autosave for when we leave buffers or windows
+local autosave = vim.api.nvim_create_augroup("AutoSave", { clear = true })
+
+vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
+  group = autosave,
+  callback = function()
+    if vim.bo.modified and vim.bo.modifiable and vim.fn.expand("%") ~= "" then
+      vim.cmd("silent! update")
+    end
+  end,
+})

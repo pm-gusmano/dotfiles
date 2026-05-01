@@ -16,16 +16,22 @@
         neovim
         nixd
         nixfmt
+        atuin
+        bat
+        delta
         eza
         git
         jujutsu
         jjui
         just
+        navi
         fd
         fzf
         ripgrep
+        starship
         yazi
         zellij
+        zoxide
         rustup
         uv
         docker

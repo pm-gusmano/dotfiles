@@ -5,12 +5,14 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs }:
+  outputs =
+    { self, nixpkgs }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
 
       tools = with pkgs; [
+        alacritty
         neovim
         nixd
         nixfmt
@@ -34,7 +36,8 @@
         tree-sitter
         stow
       ];
-    in {
+    in
+    {
       packages.${system} = {
         default = pkgs.buildEnv {
           name = "pm-gusmano-tools";

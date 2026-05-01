@@ -25,6 +25,17 @@ def write(path: Path, content: str) -> None:
     path.write_text(content)
 
 
+def style(**attrs: str | bool) -> str:
+    parts = []
+    for key, value in attrs.items():
+        if isinstance(value, bool):
+            rendered = "true" if value else "false"
+        else:
+            rendered = f'"{value}"'
+        parts.append(f"{key} = {rendered}")
+    return "{ " + ", ".join(parts) + " }"
+
+
 def render_alacritty(theme: str, flavour: str, palette: dict[str, str], semantic: dict[str, str]) -> None:
     bg = color(palette, semantic, "background")
     fg = color(palette, semantic, "foreground")
@@ -155,10 +166,76 @@ def render_nvim(theme: str, flavour: str, palette: dict[str, str], semantic: dic
     write(ROOT / "nvim/.config/nvim/lua/plugins/colorscheme.lua", content)
 
 
+def render_jjui(theme: str, flavour: str, palette: dict[str, str], semantic: dict[str, str]) -> None:
+    theme_name = f"{theme}-{flavour}"
+    bg = color(palette, semantic, "background")
+    fg = color(palette, semantic, "foreground")
+    panel = color(palette, semantic, "panel")
+    border = color(palette, semantic, "panel_border")
+    selection = color(palette, semantic, "selection")
+    dim = color(palette, semantic, "dim_foreground")
+    accent = color(palette, semantic, "accent")
+    accent_alt = color(palette, semantic, "accent_alt")
+
+    config = f"""{HEADER_TOML}[ui]
+theme = "{theme_name}"
+"""
+    write(ROOT / "jjui/.config/jjui/config.toml", config)
+
+    entries = {
+        "text": style(fg=fg, bg=bg),
+        "dimmed": style(fg=dim),
+        "selected": style(fg=fg, bg=selection, bold=True),
+        "border": style(fg=border),
+        "title": style(fg=accent, bold=True),
+        "shortcut": style(fg=color(palette, semantic, "info"), bold=True),
+        "matched": style(fg=color(palette, semantic, "warning"), bold=True),
+        "source_marker": style(fg=bg, bg=color(palette, semantic, "success"), bold=True),
+        "target_marker": style(fg=bg, bg=accent_alt, bold=True),
+        "status": style(fg=fg, bg=panel),
+        "status title": style(fg=bg, bg=accent, bold=True),
+        "status shortcut": style(fg=color(palette, semantic, "info"), bold=True),
+        "status dimmed": style(fg=dim),
+        "revset title": style(fg=accent, bold=True),
+        "revset text": style(fg=fg, bold=True),
+        "revset completion selected": style(fg=fg, bg=selection, bold=True),
+        "revset completion matched": style(fg=color(palette, semantic, "warning"), bold=True),
+        "revset completion dimmed": style(fg=dim),
+        "revisions": style(fg=fg, bg=bg),
+        "revisions selected": style(fg=fg, bg=selection, bold=True),
+        "revisions dimmed": style(fg=dim),
+        "oplog selected": style(fg=fg, bg=selection, bold=True),
+        "evolog": style(fg=fg, bg=panel),
+        "evolog selected": style(fg=fg, bg=selection, bold=True),
+        "help": style(fg=fg, bg=panel),
+        "help title": style(fg=accent, bold=True, underline=True),
+        "help border": style(fg=border),
+        "menu": style(fg=fg, bg=panel),
+        "menu title": style(fg=accent, bold=True),
+        "menu shortcut": style(fg=color(palette, semantic, "info"), bold=True),
+        "menu dimmed": style(fg=dim),
+        "menu border": style(fg=border),
+        "menu selected": style(fg=fg, bg=selection, bold=True),
+        "confirmation": style(fg=fg, bg=panel),
+        "confirmation text": style(fg=fg),
+        "confirmation selected": style(fg=fg, bg=selection, bold=True),
+        "confirmation dimmed": style(fg=dim),
+        "confirmation border": style(fg=color(palette, semantic, "warning")),
+        "undo": style(fg=fg, bg=panel),
+        "undo confirmation dimmed": style(fg=dim),
+        "undo confirmation selected": style(fg=fg, bg=selection, bold=True),
+        "preview": style(fg=fg, bg=bg),
+        "preview border": style(fg=border),
+    }
+    theme_body = "\n".join(f'"{key}" = {value}' for key, value in entries.items())
+    write(ROOT / f"jjui/.config/jjui/themes/{theme_name}.toml", HEADER_TOML + theme_body + "\n")
+
+
 def main() -> None:
     theme, flavour, palette, semantic = load_theme()
     render_alacritty(theme, flavour, palette, semantic)
     render_nvim(theme, flavour, palette, semantic)
+    render_jjui(theme, flavour, palette, semantic)
 
 
 if __name__ == "__main__":

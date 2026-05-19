@@ -7,6 +7,28 @@ windows_config_dir="/mnt/c/Users/User/AppData/Roaming/alacritty"
 windows_config="$windows_config_dir/alacritty.toml"
 
 mkdir -p "$windows_config_dir"
-cp "$source_config" "$windows_config"
+python3 - "$source_config" "$windows_config" <<'PY'
+from pathlib import Path
+import sys
+
+source_config = Path(sys.argv[1])
+windows_config = Path(sys.argv[2])
+
+local_shell = """[terminal.shell]
+program = "/home/pm-gusmano/.nix-profile/bin/zellij"
+args = ["attach", "--create", "main"]
+"""
+
+windows_shell = """[terminal.shell]
+program = "C:\\\\Windows\\\\System32\\\\wsl.exe"
+args = ["--cd", "~", "--exec", "/home/pm-gusmano/.nix-profile/bin/zellij", "attach", "--create", "main"]
+"""
+
+content = source_config.read_text()
+if local_shell not in content:
+    raise SystemExit(f"Could not find expected local shell stanza in {source_config}")
+
+windows_config.write_text(content.replace(local_shell, windows_shell, 1))
+PY
 
 printf 'Synced %s -> %s\n' "$source_config" "$windows_config"

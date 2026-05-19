@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+source_config="$repo_root/alacritty/.config/alacritty/alacritty.toml"
+windows_config_dir="/mnt/c/Users/User/AppData/Roaming/alacritty"
+windows_config="$windows_config_dir/alacritty.toml"
+
+mkdir -p "$windows_config_dir"
+cp "$source_config" "$windows_config"
+
+printf 'Synced %s -> %s\n' "$source_config" "$windows_config"

@@ -1,0 +1,47 @@
+email = "paul.gusmano@outlook.com"
+#:schema https://jj-vcs.github.io/jj/latest/config-schema.json
+
+[ui]
+default-command = "log"
+editor = "nvim"
+merge-editor = "nvim"
+diff-editor = "meld"
+diff-formatter = "delta"
+pager = "delta"
+
+[ui.movement]
+edit = true
+
+[user]
+name = "Paul Gusmano"
+email = "Paul.Gusmano@us.kbr.com"
+
+[core]
+editor = "nvim"
+
+[merge-tools.delta]
+diff-args = ["--paging=never", "$left", "$right"]
+diff-expected-exit-codes = [0, 1]
+
+[merge-tools.nvim]
+program = "nvim"
+merge-args = [
+  "-f",
+  "-d",
+  "$output",
+  "-M",
+  "$left",
+  "$base",
+  "$right",
+  "-c",
+  "wincmd J",
+  "-c",
+  "set modifiable",
+  "-c",
+  "set write",
+  "-c",
+  "/<<<<<</+2",
+]
+merge-tool-edits-conflict-markers = true
+edit-args = ["-f", "-d", "$left", "$right"]
+diff-args = []

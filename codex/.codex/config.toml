@@ -2,6 +2,8 @@ model = "gpt-5.5"
 model_reasoning_effort = "xhigh"
 approvals_reviewer = "user"
 personality = "friendly"
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
 
 [tui]
 vim_mode_default = true
@@ -13,5 +15,38 @@ vim_mode_default = true
 hide_full_access_warning = true
 fast_default_opt_out = true
 
+[notice.model_migrations]
+"gpt-5.3-codex" = "gpt-5.4"
+
+[plugins."github@openai-curated"]
+enabled = true
+
+[projects."/home/pm-gusmano"]
+trust_level = "trusted"
+
 [projects."/home/pm-gusmano/dotfiles"]
+trust_level = "trusted"
+
+[projects."/home/pm-gusmano/ALE3D_Work/tanker_in_tunnel"]
+trust_level = "trusted"
+
+[projects."/home/pm-gusmano/ale3d-work/tanker_experiments/tanker_in_tunnel"]
+trust_level = "trusted"
+
+[projects."/home/pm-gusmano/dev/Research/ale3d_work/tanker_experiments/tanker_in_tunnel"]
+trust_level = "trusted"
+
+[projects."/mnt/c/Users/User"]
+trust_level = "trusted"
+
+[projects."/mnt/c/Users/User/ALE3D Work/tanker_experiments"]
+trust_level = "trusted"
+
+[projects."/mnt/c/Users/User/ALE3D Work/tanker_experiments/tanker_in_granite"]
+trust_level = "trusted"
+
+[projects."/mnt/c/Users/User/ALE3D Work/tanker_experiments/tanker_in_tunnel"]
+trust_level = "trusted"
+
+[projects."/mnt/c/Program Files/HPCMP Kerberos"]
 trust_level = "trusted"

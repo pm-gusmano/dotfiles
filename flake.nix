@@ -3,13 +3,15 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-apptainer.url = "github:NixOS/nixpkgs/master";
   };
 
   outputs =
-    { self, nixpkgs }:
+    { self, nixpkgs, nixpkgs-apptainer }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
+      pkgsApptainer = import nixpkgs-apptainer { inherit system; };
 
       tools = with pkgs; [
         alacritty
@@ -35,7 +37,7 @@
         rustup
         uv
         docker
-        apptainer
+        pkgsApptainer.apptainer
         dep-tree
         difftastic
         ast-grep

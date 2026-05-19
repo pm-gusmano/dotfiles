@@ -4,8 +4,9 @@ email = "paul.gusmano@outlook.com"
 [ui]
 default-command = "log"
 editor = "nvim"
-merge-editor = "nvim"
-diff-editor = "meld"
+merge-editor = "diffconflicts"
+diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
+diff-instructions = false
 diff-formatter = "delta"
 pager = "delta"
 
@@ -22,6 +23,20 @@ editor = "nvim"
 [merge-tools.delta]
 diff-args = ["--paging=never", "$left", "$right"]
 diff-expected-exit-codes = [0, 1]
+
+[merge-tools.diffconflicts]
+program = "nvim"
+merge-args = [
+  "-c",
+  "let g:jj_diffconflicts_marker_length=$marker_length",
+  "-c",
+  "JJDiffConflicts!",
+  "$output",
+  "$base",
+  "$left",
+  "$right",
+]
+merge-tool-edits-conflict-markers = true
 
 [merge-tools.nvim]
 program = "nvim"

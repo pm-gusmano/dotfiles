@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+source_config="$repo_root/windows/epkl/EPKL_Layouts_Override.ini"
+
+windows_user="${WINDOWS_USER:-paulg.000}"
+epkl_dir="${EPKL_DIR:-/mnt/c/Users/$windows_user/Desktop/EPKL}"
+target_config="$epkl_dir/EPKL_Layouts_Override.ini"
+
+if [[ ! -d "$epkl_dir" ]]; then
+  printf 'EPKL directory not found: %s\n' "$epkl_dir" >&2
+  exit 1
+fi
+
+cp "$source_config" "$target_config"
+printf 'Synced %s -> %s\n' "$source_config" "$target_config"

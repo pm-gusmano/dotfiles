@@ -11,6 +11,12 @@ y = 2
 size = 12
 normal = { family = "FiraCode Nerd Font Mono", style = "Regular" }
 
+[keyboard]
+bindings = [
+  { key = "F11", action = "ToggleFullscreen" },
+  { key = "Enter", mods = "Alt", action = "ReceiveChar" },
+]
+
 [colors.primary]
 background = "#11111b"
 foreground = "#cdd6f4"

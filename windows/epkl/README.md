@@ -1,15 +1,22 @@
-# EPkl
+# EPKL
 
 Windows source:
 
-`C:\Users\User\Desktop\EPKL_Executable_v1-4-2\EPKL_Layouts_Override.ini`
+`C:\Users\paulg.000\Desktop\EPKL\EPKL_Layouts_Override.ini`
 
 Tracked file:
 
 `windows/epkl/EPKL_Layouts_Override.ini`
 
-To restore the tracked override into the Windows EPkl install from WSL:
+To restore the tracked override into the Windows EPKL install from WSL:
 
 ```sh
-cp ~/dotfiles/windows/epkl/EPKL_Layouts_Override.ini /mnt/c/Users/User/Desktop/EPKL_Executable_v1-4-2/EPKL_Layouts_Override.ini
+scripts/sync-epkl-to-windows
+```
+
+Override the defaults when needed:
+
+```sh
+WINDOWS_USER=paulg.000 scripts/sync-epkl-to-windows
+EPKL_DIR=/mnt/c/Users/paulg.000/Desktop/EPKL scripts/sync-epkl-to-windows
 ```

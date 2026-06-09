@@ -2,7 +2,7 @@
 
 Windows source:
 
-`C:\Users\paulg.000\Desktop\EPKL\EPKL_Layouts_Override.ini`
+`C:\Users\User\Desktop\EPKL_Executable_v1-4-2\EPKL_Layouts_Override.ini`
 
 Tracked file:
 
@@ -17,6 +17,6 @@ scripts/sync-epkl-to-windows
 Override the defaults when needed:
 
 ```sh
-WINDOWS_USER=paulg.000 scripts/sync-epkl-to-windows
-EPKL_DIR=/mnt/c/Users/paulg.000/Desktop/EPKL scripts/sync-epkl-to-windows
+WINDOWS_USER=User scripts/sync-epkl-to-windows
+EPKL_DIR=/mnt/c/Users/User/Desktop/EPKL_Executable_v1-4-2 scripts/sync-epkl-to-windows
 ```

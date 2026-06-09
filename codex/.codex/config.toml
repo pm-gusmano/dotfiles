@@ -1,5 +1,5 @@
 model = "gpt-5.5"
-model_reasoning_effort = "xhigh"
+model_reasoning_effort = "high"
 approvals_reviewer = "user"
 personality = "friendly"
 approval_policy = "never"
@@ -51,4 +51,7 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/mnt/c/Program Files/HPCMP Kerberos"]
+trust_level = "trusted"
+
+[projects."/home/pm-gusmano/dev/Research/container_development/ale3d_container"]
 trust_level = "trusted"

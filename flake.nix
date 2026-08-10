@@ -39,6 +39,7 @@
         difftastic
         ast-grep
         tree-sitter
+        poppler-utils
         stow
       ];
     in

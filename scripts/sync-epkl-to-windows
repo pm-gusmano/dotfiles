@@ -4,8 +4,8 @@ set -euo pipefail
 repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 source_config="$repo_root/windows/epkl/EPKL_Layouts_Override.ini"
 
-windows_user="${WINDOWS_USER:-paulg.000}"
-epkl_dir="${EPKL_DIR:-/mnt/c/Users/$windows_user/Desktop/EPKL}"
+windows_user="${WINDOWS_USER:-User}"
+epkl_dir="${EPKL_DIR:-/mnt/c/Users/$windows_user/Desktop/EPKL_Executable_v1-4-2}"
 target_config="$epkl_dir/EPKL_Layouts_Override.ini"
 
 if [[ ! -d "$epkl_dir" ]]; then
